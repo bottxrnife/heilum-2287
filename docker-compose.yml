@@ -1,0 +1,34 @@
+version: "2.1"
+
+services:
+
+  loragtwpktfwd:
+    restart: always
+    image: pastagringo/lorapacketforwarder_sx1302_us:latest
+    privileged: true
+
+  helium-miner:
+    restart: always
+    image: quay.io/team-helium/miner:miner-arm64_2020.09.21.1_GA
+    ports:
+      - "44158:44158/tcp"
+      - "1680:1680/udp"
+    volumes:
+      - 'miner-data:/var/data'
+      - 'miner-log:/var/log/miner'
+    environment:
+      - 'REGION_OVERRIDE=US915'
+      
+  web:
+    build: ./web
+    privileged: true
+    restart: always
+    ports: 
+      - "80:80"
+    volumes:
+      - 'miner-data:/var/data'
+      - 'miner-log:/var/log/miner'
+
+volumes:
+  miner-data:
+  miner-log:
