@@ -19,7 +19,7 @@ services:
       - 'REGION_OVERRIDE=US915'
       
   web:
-    build: web
+    build: ./web
     privileged: true
     restart: always
     ports: 
