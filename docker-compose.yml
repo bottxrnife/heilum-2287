@@ -1,7 +1,6 @@
-version: "2"
+version: "2.1"
 
 services:
-
   loragtwpktfwd:
     restart: always
     image: pastagringo/lorapacketforwarder_sx1302_us:latest
@@ -20,7 +19,7 @@ services:
       - 'REGION_OVERRIDE=US915'
       
   web:
-    build: ./web
+    build: web
     privileged: true
     restart: always
     ports: 
